@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Search Form/Bar 08</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stylesearch.css') }}">
+
+	</head>
+	<body>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section">Recherche dans la base de données Digidata</h2>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-12">
+					<h2 class="title-job text-center mb-4">Trouver un lieu</h2>
+					<form action="GET" class="booking-form">
+	        		<div class="row">
+	        			<div class="col-md mb-md-0 mb-1">
+	        				<div class="form-group">
+	          				<div class="form-field">
+	          					<div class="icon"><span class="fa fa-search"></span></div>
+			                <input type="text" class="form-control" placeholder="entrez un asciiname">
+			              </div>
+		              </div>
+	        			</div>
+	        			<div class="col-md mb-md-0 mb-1">
+	        				<div class="form-group">
+	          				<div class="form-field">
+	          					<div class="icon"><span class="fa fa-search"></span></div>
+			                <input type="text" class="form-control" placeholder="regex sur le champ">
+			              </div>
+		              </div>
+	        			</div>
+	        			<div class="col-md mb-md-0 mb-1">
+	        				<div class="form-group">
+	        					<div class="form-field">
+	          					<div class="select-wrap">
+	                      <div class="icon"><span class="fa fa-arrow-down"></span></div>
+						  <select name="" id="" class="form-control">
+	                        <option value="">geonameid</option>
+	                        <option value="">name</option>
+	                        <option value="">alternatenames</option>
+	                        <option value="">latitude </option>
+	                        <option value="">longitude </option>
+							<option value="">feature class </option>
+	                        <option value="">country code</option>
+	                        <option value="">cc2 </option>
+	                        <option value="">admin1 code </option>
+							<option value="">admin2 code</option>
+	                        <option value="">admin3 code</option>
+	                        <option value="">admin4 code</option>
+	                        <option value="">population</option>
+	                        <option value="">elevation</option>
+							<option value="">dem </option>
+	                        <option value="">timezone</option>
+	                        <option value="">modification date</option>
+	                      </select>
+	                    </div>
+			              </div>
+		              </div>
+	        			</div>
+	        			<div class="col-md d-flex align-items-end mb-md-0 mb-1">
+	        				<div class="form-group">
+			              <a href="#" class="btn btn-primary px-4 align-self-stretch d-block"><span>Chercher</span></a>
+			            </div>
+	        			</div>
+	        		</div>
+	        	</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="js/jquery.min.js"></script>
+  <script src="js/popper.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
+
+	</body>
+</html>
+

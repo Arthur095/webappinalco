@@ -1,0 +1,2 @@
+Arthur Bouzard; Création de la structure de départ du projet, programmation, tests, déploiement après création de la table hébergée chez Amazon, relecture et modifications du rapport de projet, implémentation jwt avec flask_jwt.
+Fabienne Auffret Programmation, tests, déploiement sur Heroku de la base réduite, tests, création de la base du rapport, documentation jwt (implémation avec PyJWT mais non retenue car modification des données fournies par le client).

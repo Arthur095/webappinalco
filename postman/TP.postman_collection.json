@@ -1,0 +1,405 @@
+{
+	"info": {
+		"_postman_id": "63bc9a29-5e0a-444f-8293-6537e3066ba1",
+		"name": "TP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/auth",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/users/1",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/users/all",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user field by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/users/1/prenom",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users",
+						"1",
+						"prenom"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user by field and regex",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/users/prenom/Tho_*",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users",
+						"prenom",
+						"Tho_*"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nom\": \"Samuel\",\r\n    \"prenom\": \"Jackson\",\r\n    \"fonction\": \"Chef service matériel informatique\",\r\n    \"anciennete\": 20,\r\n    \"conge\": 14,\r\n    \"actif\": true,\r\n    \"actionnaire\": false,\r\n    \"missions\": [\r\n        \"Paris\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/users",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit user by id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fonction\": \"TEEEEEST22\",\r\n    \"nom\": \"GIRERD\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/users/1",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/users/2",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get data by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/data/9",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"data",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get data field by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/data/9/name",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"data",
+						"9",
+						"name"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get data by field and regex",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/data/admin4/2_*",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"data",
+						"admin4",
+						"2_*"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put data",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"geonameid\" : 12213976,\r\n    \"name\" : \"TEST\",\r\n    \"asciiname\" : \"Villarenger\",\r\n    \"alternate_names\" :\"Villarenger\",\r\n    \"latitude\" : 45.38833,\r\n    \"longitude\" : 6.4434,\r\n    \"feature_class\" : \"P\",\r\n    \"feature_code\" : \"PPL\",\r\n    \"country_code\" : \"FR\",\r\n    \"cc2\" : \"FR\",\r\n    \"admin1\" : 84,\r\n    \"admin2\" : 73,\r\n    \"admin3\" : 731,\r\n    \"admin4\" : 73257,\r\n    \"population\" : 0,\r\n    \"elevation\" :  0,\r\n    \"dem\" : 1399,\r\n    \"timezone\" : \"Europe/Paris\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/data",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"geonameid\" : 12213976,\r\n    \"name\" : \"Villarenger\",\r\n    \"asciiname\" : \"Villarenger\",\r\n    \"alternate_names\" :\"Villarenger\",\r\n    \"latitude\" : 45.38833,\r\n    \"longitude\" : 6.4434,\r\n    \"feature_class\" : \"P\",\r\n    \"feature_code\" : \"PPL\",\r\n    \"country_code\" : \"FR\",\r\n    \"cc2\" : \"FR\",\r\n    \"admin1\" : 84,\r\n    \"admin2\" : 73,\r\n    \"admin3\" : 731,\r\n    \"admin4\" : 73257,\r\n    \"population\" : 0,\r\n    \"elevation\" :  0,\r\n    \"dem\" : 1399,\r\n    \"timezone\" : \"Europe/Paris\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/data/1",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"data",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete data",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:5000/data/148539",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"data",
+						"148539"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Heroku",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"ertim2021\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://inappco.herokuapp.com/auth",
+					"protocol": "https",
+					"host": [
+						"inappco",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test heroku",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://inappco.herokuapp.com/data/1",
+					"protocol": "https",
+					"host": [
+						"inappco",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"data",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
