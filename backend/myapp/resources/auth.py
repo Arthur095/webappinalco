@@ -1,4 +1,5 @@
 from backend.myapp import *
+from backend.myapp.services.UserService import UserService
 
 @app.route('/', methods=['GET'])
 def index():
@@ -7,10 +8,6 @@ def index():
 @app.route('/register', methods=['GET'])
 def register():
     return render_template('auth/register.html')
-
-@app.route('/login', methods=['GET'])
-def login():
-    return render_template('auth/login.html')
 
 @app.route('/search', methods=['GET'])
 def search():

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Digidata - Login</title>
+  	<title>{% block title%}Digidata - Connexion{% endblock%}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -10,14 +10,43 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 
 	</head>
 	<body>
+		<nav class="navbar navbar-expand-lg" style ="background-color: #e3f2fd;">
+			<a class="navbar-brand" href="{{ url_for('index') }}">Digidata</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			  <span class="navbar-toggler-icon"></span>
+			</button>
+		  
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			  <ul class="navbar-nav mr-auto">
+			
+				<li class="nav-item dropdown">
+				  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Tables
+				  </a>
+				  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" href="#">Data</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="#">Users</a>
+				  </div>
+				</li>
+			  </ul>
+			  <form class="form-inline">
+				<a class="btn btn-outline-success" type="button">Connexion</a>
+				<a class="btn btn-outline-success" href="{{ url_for('register') }}" type="button">S'enregistrer</a>
+			  </form>
+			</div>
+		  </nav>
+	{% block content %}
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Digidata - base de données</h2>
+					<h2 class="heading-section">Gestion de base de données</h2>
 				</div>
 			</div>
 			<div class="row justify-content-center">
@@ -26,27 +55,24 @@
 		      	<div class="icon d-flex align-items-center justify-content-center">
 		      		<span class="fa fa-user-o"></span>
 		      	</div>
-		      	<h3 class="text-center mb-4">Login</h3>
+		      	<h3 class="text-center mb-4">Connexion</h3>
 						<form action="post" class="login-form">
 		      		<div class="form-group">
-		      			<input type="text" class="form-control rounded-left" placeholder="Username" name ="id" required >
+		      			<input type="text" class="form-control rounded-left" placeholder="Identifiant" name ="id" required >
 		      		</div>
 	            <div class="form-group d-flex">
-	              <input type="password" class="form-control rounded-left" placeholder="Password" name ="pwd" required>
+	              <input type="password" class="form-control rounded-left" placeholder="Mot de passe" name ="pwd" required>
 	            </div>
 	            <div class="form-group">
-	            	<button type="submit" class="form-control btn btn-primary rounded submit px-3">Login</button>
+	            	<button type="submit" class="form-control btn btn-primary rounded submit px-3">Connexion</button>
 	            </div>
 	            <div class="form-group d-md-flex">
 	            	<div class="w-50">
-	            		<label class="checkbox-wrap checkbox-primary">Se souvenir de moi
-									  <input type="checkbox" checked>
-									  <span class="checkmark"></span>
-									</label>
-								</div>
-								<div class="w-50 text-md-right">
-									<a href="#">Mot de passe oublié</a>
-								</div>
+	            		<p>Pas encore de compte ? </p>
+					</div>
+					<div class="w-50 text-md-right">
+						<a href="{{ url_for('register') }}" class="btn btn-outline-success" type="button">S'enregistrer</a>
+					</div>
 	            </div>
 	          </form>
 	        </div>
@@ -54,6 +80,7 @@
 			</div>
 		</div>
 	</section>
+	{% endblock %}
 
 	<script src="js/jquery.min.js"></script>
   <script src="js/popper.js"></script>
