@@ -1,0 +1,77 @@
+{% extends 'index.html' %}
+
+{% block title %}Digidata - Data : recherche{% endblock %}
+{% block content %}
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section">Recherche dans la base de données Digidata</h2>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-12">
+					<h2 class="title-job text-center mb-4">Trouver un lieu</h2>
+					<form action="GET" class="booking-form">
+	        		<div class="row">
+	        			<div class="col-md mb-md-0 mb-1">
+	        				<div class="form-group">
+	          				<div class="form-field">
+	          					<div class="icon"><span class="fa fa-search"></span></div>
+			                <input type="text" name="id" class="form-control" placeholder="entrez un asciiname">
+			              </div>
+		              </div>
+	        			</div>
+	        			<div class="col-md mb-md-0 mb-1">
+	        				<div class="form-group">
+	          				<div class="form-field">
+	          					<div class="icon"><span class="fa fa-search"></span></div>
+			                <input type="text" class="form-control" placeholder="regex sur le champ">
+			              </div>
+		              </div>
+	        			</div>
+	        			<div class="col-md mb-md-0 mb-1">
+	        				<div class="form-group">
+	        					<div class="form-field">
+	          					<div class="select-wrap">
+	                      <div class="icon"><span class="fa fa-arrow-down"></span></div>
+						  <select name="" id="" class="form-control">
+	                        <option value="id">geonameid</option>
+	                        <option value="name">name</option>
+	                        <option value="altname">alternatenames</option>
+	                        <option value="lat">latitude </option>
+	                        <option value="long">longitude </option>
+							<option value="fc">feature class </option>
+	                        <option value="cc">country code</option>
+	                        <option value="cc2">cc2 </option>
+	                        <option value="ac1">admin1 code </option>
+							<option value="ac2">admin2 code</option>
+	                        <option value="ac3">admin3 code</option>
+	                        <option value="ac4">admin4 code</option>
+	                        <option value="pop">population</option>
+	                        <option value="el">elevation</option>
+							<option value="dem">dem </option>
+	                        <option value="tz">timezone</option>
+	                        <option value="md">modification date</option>
+	                      </select>
+	                    </div>
+			              </div>
+		              </div>
+	        			</div>
+	        			<div class="col-md d-flex align-items-end mb-md-0 mb-1">
+	        				<div class="form-group">
+			              <a class="btn btn-primary px-4 align-self-stretch d-block" type="submit"><span>Rechercher</span></a>
+			            </div>
+	        			</div>
+	        		</div>
+	        	</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<table>
+	{% for user in users %}
+	<tr><td>{{ user["nom"] }}</td></tr></div>
+	{% endfor %}
+	</table>
+{% endblock %}

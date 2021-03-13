@@ -9,6 +9,6 @@ def index():
 def register():
     return render_template('auth/register.html')
 
-@app.route('/search', methods=['GET'])
+@app.route('/search')
 def search():
     return render_template('data/search.html')

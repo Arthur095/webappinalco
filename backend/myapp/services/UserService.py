@@ -35,7 +35,7 @@ class UserService(Resource):
         user_dict = user.to_dict()
          
         if column == None :
-            return user_dict
+            return [user_dict]
         elif column in user_dict.keys() :
             return {f"{column}" : user_dict[column]}
         else:

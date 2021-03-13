@@ -12,13 +12,13 @@
 			<div class="row justify-content-center">
 				<div class="col-md-12">
 					<h2 class="title-job text-center mb-4">Trouver un lieu</h2>
-					<form action="GET" class="booking-form">
+					<form class="booking-form">
 	        		<div class="row">
 	        			<div class="col-md mb-md-0 mb-1">
 	        				<div class="form-group">
 	          				<div class="form-field">
 	          					<div class="icon"><span class="fa fa-search"></span></div>
-			                <input type="text" class="form-control" placeholder="entrez un asciiname">
+			                <input type="text" name="id" class="form-control" placeholder="entrez un asciiname">
 			              </div>
 		              </div>
 	        			</div>
@@ -59,8 +59,8 @@
 		              </div>
 	        			</div>
 	        			<div class="col-md d-flex align-items-end mb-md-0 mb-1">
-	        				<div class="form-group">
-			              <a href="#" class="btn btn-primary px-4 align-self-stretch d-block"><span>Rechercher</span></a>
+	        				<div id="valider" class="form-group">
+			              <button class="btn btn-primary px-4 align-self-stretch d-block" type="submit"><span>Rechercher</span></button>
 			            </div>
 	        			</div>
 	        		</div>
