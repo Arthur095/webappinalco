@@ -1,12 +1,13 @@
 {% extends 'index.html' %}
 
 {% block title %}Digidata - Data : recherche{% endblock %}
+{% block script %}<script type="text/javascript" src="{{ url_for('static', filename='js/search.js') }}"></script>{% endblock %}
 {% block content %}
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Recherche dans la base de données Digidata</h2>
+					<h2 class="heading-section">Recherche dans la base de données Digidata</br></br>Table : Data</h2>
 				</div>
 			</div>
 			<div class="row justify-content-center">
@@ -18,7 +19,7 @@
 	        				<div class="form-group">
 	          				<div class="form-field">
 	          					<div class="icon"><span class="fa fa-search"></span></div>
-			                <input type="text" name="id" class="form-control" placeholder="entrez un asciiname">
+			                <input type="text" name="id" class="form-control" placeholder="Id">
 			              </div>
 		              </div>
 	        			</div>
@@ -26,7 +27,7 @@
 	        				<div class="form-group">
 	          				<div class="form-field">
 	          					<div class="icon"><span class="fa fa-search"></span></div>
-			                <input type="text" class="form-control" placeholder="regex sur le champ">
+			                <input type="text" name="search" class="form-control" placeholder="Recherche (ou regex)">
 			              </div>
 		              </div>
 	        			</div>
@@ -35,24 +36,25 @@
 	        					<div class="form-field">
 	          					<div class="select-wrap">
 	                      <div class="icon"><span class="fa fa-arrow-down"></span></div>
-						  <select name="" id="" class="form-control">
-	                        <option value="">geonameid</option>
-	                        <option value="">name</option>
-	                        <option value="">alternatenames</option>
-	                        <option value="">latitude </option>
-	                        <option value="">longitude </option>
-							<option value="">feature class </option>
-	                        <option value="">country code</option>
-	                        <option value="">cc2 </option>
-	                        <option value="">admin1 code </option>
-							<option value="">admin2 code</option>
-	                        <option value="">admin3 code</option>
-	                        <option value="">admin4 code</option>
-	                        <option value="">population</option>
-	                        <option value="">elevation</option>
-							<option value="">dem </option>
-	                        <option value="">timezone</option>
-	                        <option value="">modification date</option>
+						  <select name="field" id="field" class="form-control">
+							<option value="all">All</option>
+	                        <option value="geonameid">geonameid</option>
+	                        <option value="name">name</option>
+	                        <option value="alternate_names">alternate names</option>
+	                        <option value="latitude">latitude</option>
+	                        <option value="longitude">longitude</option>
+							<option value="feature_class">feature class</option>
+	                        <option value="country_code">country code</option>
+	                        <option value="cc2">cc2</option>
+	                        <option value="admin1">admin1 code</option>
+							<option value="admin2">admin2 code</option>
+	                        <option value="admin3">admin3 code</option>
+	                        <option value="admin4">admin4 code</option>
+	                        <option value="population">population</option>
+	                        <option value="elevation">elevation</option>
+							<option value="dem">dem</option>
+	                        <option value="timezone">timezone</option>
+	                        <option value="modification_date">modification date</option>
 	                      </select>
 	                    </div>
 			              </div>
@@ -65,6 +67,8 @@
 	        			</div>
 	        		</div>
 	        	</form>
+				<div id="get_result">
+				</div>
 				</div>
 			</div>
 		</div>

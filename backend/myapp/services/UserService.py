@@ -2,6 +2,7 @@ from flask import request
 from flask_restful import Resource
 from flask_jwt import jwt_required
 import collections
+from collections import OrderedDict
 from datetime import date
 from ..models import Users
 
@@ -20,10 +21,10 @@ class UserService(Resource):
             if users == [] :
                 return {"error" : "Nothing found"}, 400
   
-            return [user.to_dict() for user in users]
+            return [OrderedDict((k, d.to_dict().get(k)) for k in ["id"] + Users.get_column() + ["mise_a_jour"]) for d in users]
         
         if(all == "all"):
-            return [user.to_dict() for user in Users.query.all()]
+            return [OrderedDict((k, user.to_dict().get(k)) for k in ["id"] + Users.get_column() + ["mise_a_jour"]) for user in Users.query.all()]
         elif(id == None):
             return {"error": "User id not specified"}, 400
 
@@ -32,10 +33,10 @@ class UserService(Resource):
         if(user == None):
             return {"error": "User not found"}, 404
         
-        user_dict = user.to_dict()
+        user_dict = OrderedDict((k, user.to_dict().get(k)) for k in ["id"] + Users.get_column() + ["mise_a_jour"])
          
         if column == None :
-            return [user_dict]
+            return user_dict
         elif column in user_dict.keys() :
             return {f"{column}" : user_dict[column]}
         else:

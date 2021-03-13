@@ -1,14 +1,18 @@
 from flask import request
 from flask_restful import Resource
 from flask_jwt import jwt_required
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql.expression import cast
+from sqlalchemy import String
 import collections
+from collections import OrderedDict
 from datetime import date
 from ..models import Data
 
 """Ensemble des requêtes possibles via l'url ip/users"""
 class DataService(Resource):
     #Vérifie si le 
-    decorators = [jwt_required()]
+    #decorators = [jwt_required()]
     """Renvoie les donnée de la ligne spécifiée, les donnée de la ligne et de la colonne spécifiée ou de la colonne et de la regex spécifiée"""
     def get(self, id=None, regex=None, column=None):
         
@@ -16,13 +20,13 @@ class DataService(Resource):
             if column not in Data.get_column() :
                 return {"error" : "Wrong field name in url"}
             
-            data = Data.query.filter(getattr(Data, column).op('SIMILAR TO')(f'{regex}')).all()
+            data = Data.query.filter( cast( getattr(Data, column), String ).op('SIMILAR TO')(f'{regex}')).all()
            
             if data == [] :
                 return {"error" : "Nothing found"}, 400
-  
-            return [d.to_dict() for d in data]
-        
+            print(Data.get_column())
+            return [OrderedDict((k, d.to_dict().get(k)) for k in ["id"] + Data.get_column() + ["modification_date"]) for d in data]
+                    
         if id == None:
             return {"error": "Location id not specified"}, 400
 
@@ -31,7 +35,7 @@ class DataService(Resource):
         if data == None:
             return {"error": "Location not found"}, 404
         
-        data_dict = data.to_dict()
+        data_dict = OrderedDict((k, data.to_dict().get(k)) for k in ["id"] + Data.get_column() + ["modification_date"])
          
         if column == None :
             return data_dict
