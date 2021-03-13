@@ -142,7 +142,7 @@ $(document).ready(function(){
         body["conge"] =  $("input[name='conge']").val();
         body["actif"] =  $("input[name='actif']").val();
         body["actionnaire"] =  $("input[name='actionnaire']").val();
-        body["missions"] =  $("input[name='missions']").val();
+        body["missions"] =  $("input[name='missions']").val().split(" ");
         
         //If one field is empty : error message.
         for(k in body){
@@ -154,8 +154,16 @@ $(document).ready(function(){
             }
         }
 
-
-
+        var settings = {
+            "url": "/users",
+            "method": "PUT",
+            "timeout": 0,
+            "data": JSON.stringify(body)
+          };
+          
+          $.ajax(settings).done(function (response) {
+            console.log(response);
+          });
 
 
     });//End Search form action button
