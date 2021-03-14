@@ -117,8 +117,24 @@
 	        			<div class="col-md mb-md-0 mb-1">
 	        				<div class="form-group">
 	          				<div class="form-field">
-	          					<div class="icon"><span class="fa fa-user"></span></div>
-			                <input type="text" name ="actif" class="form-control" placeholder="Actif">
+	          					<div class="icon"></div>
+							<select name="actif" id="actif" class="form-control">
+								<option disabled selected value>Actif</option>
+								<option value="true">Oui</option>
+								<option value="false">Non</option>
+							  </select>
+			              </div>
+		              </div>
+	        			</div>
+	        			<div class="col-md mb-md-0 mb-1">
+	        				<div class="form-group">
+	          				<div class="form-field">
+	          					<div class="icon"></div>
+								<select name="actionnaire" id="actionnaire" class="form-control">
+								<option disabled selected value>Actionnaire</option>
+								<option value="true">Oui</option>
+								<option value="false">Non</option>
+							  </select>
 			              </div>
 		              </div>
 	        			</div>
@@ -126,15 +142,7 @@
 	        				<div class="form-group">
 	          				<div class="form-field">
 	          					<div class="icon"><span class="fa fa-user"></span></div>
-			                <input type="text" name ="actionnaire" class="form-control" placeholder="Actionnaire">
-			              </div>
-		              </div>
-	        			</div>
-	        			<div class="col-md mb-md-0 mb-1">
-	        				<div class="form-group">
-	          				<div class="form-field">
-	          					<div class="icon"><span class="fa fa-user"></span></div>
-			                <input type="text" name ="missions" class="form-control" placeholder="Missions">
+			                <input type="text" name="missions" class="form-control" placeholder="Missions">
 			              </div>
 		              </div>
 	        			</div>

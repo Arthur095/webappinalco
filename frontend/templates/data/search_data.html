@@ -1,6 +1,5 @@
 {% extends 'index.html' %}
-{% block script %}<script type="text/javascript" src="{{ url_for('static', filename='js/search.js') }}"></script>{% endblock %}
-
+{% block js %}<script type="text/javascript" src="{{ url_for('static', filename='js/search.js') }}"></script>{% endblock %}
 {% block title %}Digidata - Data : recherche{% endblock %}
 {% block content %}
 	<section class="ftco-section">
@@ -19,7 +18,7 @@
 	        				<div class="form-group">
 	          				<div class="form-field">
 	          					<div class="icon"><span class="fa fa-search"></span></div>
-			                <input type="text" name="id" class="form-control" placeholder="entrez une id">
+			                <input type="text" name="id" class="form-control" placeholder="ID">
 			              </div>
 		              </div>
 	        			</div>
@@ -27,7 +26,7 @@
 	        				<div class="form-group">
 	          				<div class="form-field">
 	          					<div class="icon"><span class="fa fa-search"></span></div>
-			                <input type="text" class="form-control" placeholder=" Recherche ou regex">
+			                <input type="text" name="search" class="form-control" placeholder=" Recherche ou regex">
 			              </div>
 		              </div>
 	        			</div>
@@ -36,40 +35,39 @@
 	        					<div class="form-field">
 	          					<div class="select-wrap">
 	                      <div class="icon"><span></span></div>
-						  <select name="" id="" class="form-control">
+						  <select name="field" id="" class="form-control">
 							<option value="all">All</option>
-	                        <option value="">geonameid</option>
-	                        <option value="">name</option>
-	                        <option value="">alternatenames</option>
-	                        <option value="">latitude</option>
-	                        <option value="">longitude</option>
-							<option value="">feature class </option>
-	                        <option value="">country code</option>
-	                        <option value="">cc2</option>
-	                        <option value="">admin1 code </option>
-							<option value="">admin2 code</option>
-	                        <option value="">admin3 code</option>
-	                        <option value="">admin4 code</option>
-	                        <option value="">population</option>
-	                        <option value="">elevation</option>
-							<option value="">dem</option>
-	                        <option value="">timezone</option>
+	                        <option value="geonameid">geonameid</option>
+	                        <option value="name">name</option>
+	                        <option value="alternate_names">alternatenames</option>
+	                        <option value="latitude">latitude</option>
+	                        <option value="longitude">longitude</option>
+							<option value="feature_class">feature class </option>
+	                        <option value="country_code">country code</option>
+	                        <option value="cc2">cc2</option>
+	                        <option value="admin1">admin1 code </option>
+							<option value="admin2">admin2 code</option>
+	                        <option value="admin3">admin3 code</option>
+	                        <option value="admin4">admin4 code</option>
+	                        <option value="population">population</option>
+	                        <option value="elevation">elevation</option>
+							<option value="dem">dem</option>
+	                        <option value="timezone">timezone</option>
 	                      </select>
 	                    </div>
 			              </div>
 		              </div>
 	        			</div>
 	        			<div class="col-md d-flex align-items-end mb-md-0 mb-1">
-	        				<div id="valider" class="form-group">
+	        				<div name="get" id="valider" class="form-group">
 			              <button class="btn btn-secondary px-4 align-self-stretch d-block" type="submit"><span>Rechercher</span></button>
 			            </div>
 	        			</div>
 	        		</div>
 	        	</form>
+				<div id="get_result">
 				</div>
-			</div>
-
-			<div id="get_result">
+				</div>
 			</div>
 
 			<div><p> <hr class="my-4"> <p></div>
@@ -99,7 +97,7 @@
 	        				<div class="form-group">
 	          				<div class="form-field">
 	          					<div class="icon"><span class="fa fa-server"></span></div>
-			                <input type="text" name ="alternatenames" class="form-control" placeholder="alternatenames">
+			                <input type="text" name ="alternate_names" class="form-control" placeholder="alternatenames">
 			              </div>
 		              </div>
 	        			</div>
@@ -126,7 +124,7 @@
 	        				<div class="form-group">
 	          				<div class="form-field">
 	          					<div class="icon"><span class="fa fa-server"></span></div>
-			                <input type="text" name ="feature class" class="form-control" placeholder="feature class">
+			                <input type="text" name ="feature_class" class="form-control" placeholder="feature class">
 			              </div>
 		              </div>
 	        			</div>
@@ -134,7 +132,7 @@
 	        				<div class="form-group">
 	          				<div class="form-field">
 	          					<div class="icon"><span class="fa fa-server"></span></div>
-			                <input type="text" name ="country code" class="form-control" placeholder="country code">
+			                <input type="text" name ="country_code" class="form-control" placeholder="country code">
 			              </div>
 		              </div>
 	        			</div>
@@ -153,7 +151,7 @@
 	        				<div class="form-group">
 	          				<div class="form-field">
 	          					<div class="icon"><span class="fa fa-server"></span></div>
-			                <input type="text" name="admin1 code" class="form-control" placeholder="admin1 code">
+			                <input type="text" name="admin1" class="form-control" placeholder="admin1 code">
 			              </div>
 		              </div>
 	        			</div>
@@ -161,7 +159,7 @@
 	        				<div class="form-group">
 	          				<div class="form-field">
 	          					<div class="icon"><span class="fa fa-server"></span></div>
-			                <input type="text" name ="admin2 code" class="form-control" placeholder="admin2 code">
+			                <input type="text" name ="admin2" class="form-control" placeholder="admin2 code">
 			              </div>
 		              </div>
 	        			</div>
@@ -169,7 +167,7 @@
 	        				<div class="form-group">
 	          				<div class="form-field">
 	          					<div class="icon"><span class="fa fa-server"></span></div>
-			                <input type="text" name ="admin3 code" class="form-control" placeholder="admin3 code">
+			                <input type="text" name ="admin3" class="form-control" placeholder="admin3 code">
 			              </div>
 		              </div>
 	        			</div>
@@ -177,7 +175,7 @@
 	        				<div class="form-group">
 	          				<div class="form-field">
 	          					<div class="icon"><span class="fa fa-server"></span></div>
-			                <input type="text" name ="admin4 code" class="form-control" placeholder="admin4 code">
+			                <input type="text" name ="admin4" class="form-control" placeholder="admin4 code">
 			              </div>
 		              </div>
 	        			</div>
@@ -225,7 +223,7 @@
 					
 	        		<div class="row">
 						<div class="col-md d-flex align-items-end mb-md-0 mb-1">
-	        				<div id="valider" class="form-group">
+	        				<div name="put" id="valider" class="form-group">
 			              <button class="btn btn-secondary px-4 align-self-stretch d-block" type="submit"><span>Ajouter</span></button>
 			            </div>
 	        			</div>
@@ -240,6 +238,8 @@
 	        			</div>
 	        		</div>
 	        	</form>
+				<div id="put_result">
+				</div>
 				</div>
 			</div>
 		</div>
