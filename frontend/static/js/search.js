@@ -151,7 +151,7 @@ $(document).ready(function(){
       else if(jqXHR.status==404){
         $("div[id=get_result]").html("<p>L'identifiant n'existe pas dans la base de données.</p>");
       }
-      else if(jqXHR.status==401){
+      else if(jqXHR.status==404 || jqXHR.status==500){
         windows.location = "/";
       }
       $("div[id=get_result]").css("color", "red");
@@ -212,7 +212,7 @@ $(document).ready(function(){
           $("div[id=put_result]").css("color", "green");
           $("div[id=put_result]").show();
         }).fail(function(jqXHR) {
-          if(jqXHR.status==401){
+          if(jqXHR.status==404 || jqXHR.status==500){
             windows.location = "/";
           }
           else if(jqXHR.status==400){
@@ -254,7 +254,7 @@ function deleteData(event) {
       $("div[id=get_result]").css("color", "green");
       $("div[id=get_result]").show();
   }).fail(function(jqXHR) {
-    if(jqXHR.status==401){
+    if(jqXHR.status==404 || jqXHR.status==500){
       windows.location = "/";
     }
       $("div[id=get_result]").html("<p>Une erreur est survenue lors de la supression.</p>");
@@ -356,7 +356,7 @@ function validData(event, id) {
     $("div[id=get_result]").css("color", "green");
     $("div[id=put_result]").show();
   }).fail(function(jqXHR) {
-    if(jqXHR.status==401){
+    if(jqXHR.status==404 || jqXHR.status==500){
       windows.location = "/";
     }
     $("div[id=get_result]").html("<p>Une erreur est survenue lors de l'édition.</p>");
