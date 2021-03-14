@@ -1,4 +1,4 @@
-import os, flask_login
+import os
 from flask import Flask, render_template
 from flask_jwt import JWT
 from .services.AuthService import User, authenticate, identity
