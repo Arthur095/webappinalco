@@ -132,7 +132,7 @@ $(document).ready(function(){
   
       }).fail(function(jqXHR) {
         if(jqXHR.status==404 || jqXHR.status==500){
-          windows.location = "/";
+          window.location.replace("/");
         }
         else if(jqXHR.status==400){
           $("div[id=get_result]").html("<p>Aucun élément ne correspond à votre recherche.</p>");
@@ -189,7 +189,7 @@ $(document).ready(function(){
             $("div[id=put_result]").show();
           }).fail(function(jqXHR) {
             if(jqXHR.status==404 || jqXHR.status==500){
-              windows.location = "/";
+              window.location.replace("/");
             }
             $("div[id=put_result]").html("<p>Une erreur est survenue lors de l'ajout.</p>");
             $("div[id=put_result]").css("color", "red");
@@ -228,7 +228,7 @@ function deleteData(event) {
         $("div[id=get_result]").show();
     }).fail(function(jqXHR) {
       if(jqXHR.status==404 || jqXHR.status==500){
-        windows.location = "/";
+        window.location.replace("/");
       }
         $("div[id=get_result]").html("<p>Une erreur est survenue lors de la supression.</p>");
         $("div[id=get_result]").css("color", "red");
@@ -328,7 +328,7 @@ function validData(event, id) {
     $("div[id=put_result]").show();
   }).fail(function(jqXHR) {
     if(jqXHR.status==404 || jqXHR.status==500){
-      windows.location = "/";
+      window.location.replace("/");
     }
     $("div[id=get_result]").html("<p>Une erreur est survenue lors de l'édition.</p>");
     $("div[id=get_result]").css("color", "red");
@@ -340,6 +340,6 @@ function validData(event, id) {
 function logout(event) {
   
   sessionStorage.clear();
-  windows.location = "/";
+  window.location.replace("/");
 
 };
