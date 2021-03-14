@@ -11,8 +11,7 @@ from ..models import Data
 
 """Ensemble des requêtes possibles via l'url ip/users"""
 class DataService(Resource):
-    #Vérifie si le 
-    #decorators = [jwt_required()]
+    decorators = [jwt_required()]
     """Renvoie les donnée de la ligne spécifiée, les donnée de la ligne et de la colonne spécifiée ou de la colonne et de la regex spécifiée"""
     def get(self, id=None, regex=None, column=None):
         

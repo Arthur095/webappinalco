@@ -34,6 +34,9 @@
 				  </div>
 				</li>
 			  </ul>
+			  <form class="form-inline">
+                <a name="logout" onclick="logout(event)" class="btn btn-outline-light" href="{{ url_for('index') }}" type="button">Déconnexion</a>
+              </form>
 			</div>
 		  </nav>
 	{% block content %}
@@ -59,17 +62,20 @@
 		      	<h3 class="text-center mb-4">Connexion</h3>
 						<form action="post" class="login-form">
 		      		<div class="form-group">
-		      			<input type="text" class="form-control rounded-left" placeholder="Identifiant" name ="id" required >
+		      			<input type="text" class="form-control rounded-left" placeholder="Identifiant" name ="username" required >
 		      		</div>
 	            <div class="form-group d-flex">
-	              <input type="password" class="form-control rounded-left" placeholder="Mot de passe" name ="pwd" required>
+	              <input type="password" class="form-control rounded-left" placeholder="Mot de passe" name ="password" required>
 	            </div>
-	            <div class="form-group">
-	            	<button type="submit" href="{{ url_for('search_data') }}" class="form-control btn btn-secondary rounded submit px-3">Connexion</button>
+	            <div name="connect" class="form-group">
+	            	<button type="submit" class="form-control btn btn-secondary rounded submit px-3">Connexion</button>
 	            </div>
 	            
 	          </form>
+			  			<div id="get_connect">
+			</div>
 	        </div>
+
 				</div>
 			</div>
 		</div>
@@ -77,7 +83,7 @@
 	{% endblock %}
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"  crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-	{% block js %}{% endblock %}
+	{% block js %}<script type="text/javascript" src="{{ url_for('static', filename='js/auth_jwt.js') }}"></script>{% endblock %}
 
 	</body>
 </html>

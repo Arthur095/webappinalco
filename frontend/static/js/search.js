@@ -58,6 +58,9 @@ $(document).ready(function(){
       "url": url,
       "method": "GET",
       "timeout": 0,
+      "headers": {
+        "Authorization": "Bearer " + sessionStorage.getItem('jwt')
+      },
     };
   
     $.ajax(settings).done(function (response) {
@@ -148,6 +151,9 @@ $(document).ready(function(){
       else if(jqXHR.status==404){
         $("div[id=get_result]").html("<p>L'identifiant n'existe pas dans la base de données.</p>");
       }
+      else if(jqXHR.status==401){
+        window.location.replace("/");
+      }
       $("div[id=get_result]").css("color", "red");
       $("div[id=get_result]").show();
     });
@@ -194,7 +200,8 @@ $(document).ready(function(){
           "method": "PUT",
           "timeout": 0,
           "headers": {
-              "Content-Type": "application/json"
+              "Content-Type": "application/json",
+              "Authorization": "Bearer " + sessionStorage.getItem('jwt')
             },
           "data": JSON.stringify(body)
         };
@@ -205,10 +212,15 @@ $(document).ready(function(){
           $("div[id=put_result]").css("color", "green");
           $("div[id=put_result]").show();
         }).fail(function(jqXHR) {
-          alert(jqXHR.responseText);
-          $("div[id=put_result]").html("<p>Une erreur est survenue lors de l'ajout.</p>");
-          $("div[id=put_result]").css("color", "red");
-          $("div[id=put_result]").show();
+          if(jqXHR.status==401){
+            window.location.replace("/");
+          }
+          else if(jqXHR.status==400){
+            alert(jqXHR.responseText);
+            $("div[id=put_result]").html("<p>Une erreur est survenue lors de l'ajout, veuillez vérifier la saisie.</p>");
+            $("div[id=put_result]").css("color", "red");
+            $("div[id=put_result]").show();
+          }
         });
 
 
@@ -230,7 +242,10 @@ function deleteData(event) {
   var settings = {
   "url": "/data/" + id,
   "method": "DELETE",
-  "timeout": 0
+  "timeout": 0,
+  "headers": {
+    "Authorization": "Bearer " + sessionStorage.getItem('jwt')
+  },
   };
 
   $.ajax(settings).done(function (response) {
@@ -239,6 +254,9 @@ function deleteData(event) {
       $("div[id=get_result]").css("color", "green");
       $("div[id=get_result]").show();
   }).fail(function(jqXHR) {
+    if(jqXHR.status==401){
+      window.location.replace("/");
+    }
       $("div[id=get_result]").html("<p>Une erreur est survenue lors de la supression.</p>");
       $("div[id=get_result]").css("color", "red");
       $("div[id=get_result]").show();
@@ -326,7 +344,8 @@ function validData(event, id) {
     "method": "POST",
     "timeout": 0,
     "headers": {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "Authorization": "Bearer " + sessionStorage.getItem('jwt')
     },
     "data": JSON.stringify(body),
   };
@@ -337,9 +356,20 @@ function validData(event, id) {
     $("div[id=get_result]").css("color", "green");
     $("div[id=put_result]").show();
   }).fail(function(jqXHR) {
+    if(jqXHR.status==401){
+      window.location.replace("/");
+    }
     $("div[id=get_result]").html("<p>Une erreur est survenue lors de l'édition.</p>");
     $("div[id=get_result]").css("color", "red");
     $("div[id=get_result]").show();
   });
 
 };//end validate post
+
+
+function logout(event) {
+  
+  sessionStorage.clear();
+  window.location.replace("/");
+
+};

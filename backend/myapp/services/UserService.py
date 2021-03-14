@@ -8,7 +8,7 @@ from ..models import Users
 
 """Ensemble des requêtes possibles via l'url ip/data"""
 class UserService(Resource):
-    #decorators = [jwt_required()]
+    decorators = [jwt_required()]
 
     """Renvoie les donnée de la ligne spécifiée, les donnée de la ligne et de la colonne spécifiée ou de la colonne et de la regex spécifiée"""
     def get(self, id=None, all=None, column=None, regex=None):

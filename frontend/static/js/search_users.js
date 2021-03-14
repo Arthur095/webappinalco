@@ -62,6 +62,9 @@ $(document).ready(function(){
         "url": url,
         "method": "GET",
         "timeout": 0,
+        "headers": {
+          "Authorization": "Bearer " + sessionStorage.getItem('jwt')
+        },
       };
     
       
@@ -128,7 +131,10 @@ $(document).ready(function(){
         $("div[id=get_result]").show();
   
       }).fail(function(jqXHR) {
-        if(jqXHR.status==400){
+        if(jqXHR.status==401){
+          window.location.replace("/");
+        }
+        else if(jqXHR.status==400){
           $("div[id=get_result]").html("<p>Aucun élément ne correspond à votre recherche.</p>");
         }
         else if(jqXHR.status==404){
@@ -157,7 +163,7 @@ $(document).ready(function(){
         
         //If one field is empty : error message.
         for(k in body){
-            if(body[k] === "" || body[k] === [] || body[k] == [""]){
+            if(body[k] === "" || body[k] === [] || body[k][0] == ''){
                 $("div[id=put_result]").html("<p>Veuillez remplir tous les champs du formulaire.</p>");
                 $("div[id=put_result]").css("color", "red");
                 $("div[id=put_result]").show();
@@ -170,7 +176,8 @@ $(document).ready(function(){
             "method": "PUT",
             "timeout": 0,
             "headers": {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + sessionStorage.getItem('jwt')
               },
             "data": JSON.stringify(body)
           };
@@ -181,6 +188,9 @@ $(document).ready(function(){
             $("div[id=put_result]").css("color", "green");
             $("div[id=put_result]").show();
           }).fail(function(jqXHR) {
+            if(jqXHR.status==401){
+              window.location.replace("/");
+            }
             $("div[id=put_result]").html("<p>Une erreur est survenue lors de l'ajout.</p>");
             $("div[id=put_result]").css("color", "red");
             $("div[id=put_result]").show();
@@ -205,7 +215,10 @@ function deleteData(event) {
     var settings = {
     "url": "/users/" + id,
     "method": "DELETE",
-    "timeout": 0
+    "timeout": 0,
+    "headers": {
+      "Authorization": "Bearer " + sessionStorage.getItem('jwt')
+    },
     };
 
     $.ajax(settings).done(function (response) {
@@ -214,6 +227,9 @@ function deleteData(event) {
         $("div[id=get_result]").css("color", "green");
         $("div[id=get_result]").show();
     }).fail(function(jqXHR) {
+      if(jqXHR.status==401){
+        window.location.replace("/");
+      }
         $("div[id=get_result]").html("<p>Une erreur est survenue lors de la supression.</p>");
         $("div[id=get_result]").css("color", "red");
         $("div[id=get_result]").show();
@@ -299,7 +315,8 @@ function validData(event, id) {
     "method": "POST",
     "timeout": 0,
     "headers": {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + sessionStorage.getItem('jwt')
     },
     "data": JSON.stringify(body),
   };
@@ -310,9 +327,19 @@ function validData(event, id) {
     $("div[id=get_result]").css("color", "green");
     $("div[id=put_result]").show();
   }).fail(function(jqXHR) {
+    if(jqXHR.status==401){
+      window.location.replace("/");
+    }
     $("div[id=get_result]").html("<p>Une erreur est survenue lors de l'édition.</p>");
     $("div[id=get_result]").css("color", "red");
     $("div[id=get_result]").show();
   });
  
 };//end validate post
+
+function logout(event) {
+  
+  sessionStorage.clear();
+  window.location.replace("/");
+
+};
