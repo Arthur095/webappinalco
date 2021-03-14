@@ -152,7 +152,7 @@ $(document).ready(function(){
         $("div[id=get_result]").html("<p>L'identifiant n'existe pas dans la base de données.</p>");
       }
       else if(jqXHR.status==401){
-        window.location.replace("/");
+        windows.location = "/";
       }
       $("div[id=get_result]").css("color", "red");
       $("div[id=get_result]").show();
@@ -213,7 +213,7 @@ $(document).ready(function(){
           $("div[id=put_result]").show();
         }).fail(function(jqXHR) {
           if(jqXHR.status==401){
-            window.location.replace("/");
+            windows.location = "/";
           }
           else if(jqXHR.status==400){
             alert(jqXHR.responseText);
@@ -255,7 +255,7 @@ function deleteData(event) {
       $("div[id=get_result]").show();
   }).fail(function(jqXHR) {
     if(jqXHR.status==401){
-      window.location.replace("/");
+      windows.location = "/";
     }
       $("div[id=get_result]").html("<p>Une erreur est survenue lors de la supression.</p>");
       $("div[id=get_result]").css("color", "red");
@@ -357,7 +357,7 @@ function validData(event, id) {
     $("div[id=put_result]").show();
   }).fail(function(jqXHR) {
     if(jqXHR.status==401){
-      window.location.replace("/");
+      windows.location = "/";
     }
     $("div[id=get_result]").html("<p>Une erreur est survenue lors de l'édition.</p>");
     $("div[id=get_result]").css("color", "red");
@@ -370,6 +370,6 @@ function validData(event, id) {
 function logout(event) {
   
   sessionStorage.clear();
-  window.location.replace("/");
+  windows.location = "/";
 
 };
