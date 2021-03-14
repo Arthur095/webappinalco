@@ -23,7 +23,7 @@ def identity(payload):
 
 #users enregistrés
 users = [
-    User(1, 'admin', 'admin'),
+    User(1, 'admin', 'elvis2021'),
 ]
 
 username_table = {u.username: u for u in users}
