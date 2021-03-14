@@ -60,39 +60,57 @@ $(document).ready(function(){
       "timeout": 0,
     };
   
-    
     $.ajax(settings).done(function (response) {
       console.log(response);
-      
-
-      //Start rendered table as string
-      var result = "<table class='table table-striped'><thead class='thead-dark'>";
- 
-      //If request maches only one object
+      //If request maches multiple objects
       if(response instanceof Array){
+        var result = "<table style='right:50%;position:relative;' class='table table-striped'><thead class='thead-dark'>";
         for(var k in response[0]){
           result += "<th scope='col'>" + k + "</th>";
         }
         result += "<th name='edit'>Editer</th><th name='delete'>Supprimer</th></thead><tbody>";
         response.forEach(function (dic, index) {
-          console.log(dic, index);
-          result += "<tr class='font-weight-bold'>";
-          for(var key in dic){
-              if(dic[key] == ""){
-                result += "<td>" + "null" + "</td>";
-              }
-              else{
-                result += "<td>" + dic[key] + "</td>";
-              }
+        console.log(dic, index);
+        result += "<tr class='font-weight-bold'>";
+          
+        
+        Object.defineProperty(dic, 'property', { writeable: true});
+        var name = dic["alternate_names"];
+        if(name.length > 100){
+          dic["alternate_names"] = name.substring(0, 100) + "...";
+        }
+        
+        
+        for(var key in dic){
+            if(dic[key] == ""){
+              result += "<td>" + "null" + "</td>";
             }
-          result += "<td><div id='post' name='put_" + dic["id"] +  "' class='form-group'><button onclick='editData(event)' class='btn btn-secondary px-4 align-self-stretch d-block' type='submit'><span>Editer</span></button></div></td>";
-          result += "<td><div id='delete' name='del_" + dic["id"] + "' class='form-group'><button onclick='deleteData(event)' class='btn btn-secondary px-4 align-self-stretch d-block'><span>Supprimer</span></button></div></td>";
-          result += "</tr>";
+            else{
+              result += "<td>" + dic[key] + "</td>";
+            }
+          }
+        result += "<td><div id='post' name='put_" + dic["id"] +  "' class='form-group'><button onclick='editData(event)' class='btn btn-secondary px-4 align-self-stretch d-block' type='submit'><span>Editer</span></button></div></td>";
+        result += "<td><div id='delete' name='del_" + dic["id"] + "' class='form-group'><button onclick='deleteData(event)' class='btn btn-secondary px-4 align-self-stretch d-block'><span>Supprimer</span></button></div></td>";
+        result += "</tr>";
         });
+
         result += "</tbody></table>";
       }
-
       else{
+        var result;
+        Object.defineProperty(response, 'property', { writeable: true});
+        var name = response["alternate_names"];
+        if(name != null){
+          if(name.length > 100){
+            response["alternate_names"] = name.substring(0, 100) + "...";
+          }
+        }
+        if(Object.keys(response).length != 1){
+          result = "<table style='right:50%;position:relative;' class='table table-striped'><thead class='thead-dark'>";
+        }
+        else{
+          result = "<table class='table table-striped'><thead class='thead-dark'>";
+        }
         var body = "<tr class='font-weight-bold'>";
         for(var k in response){
           result += "<th scope='col'>" + k + "</th>";
@@ -137,19 +155,29 @@ $(document).ready(function(){
   
   
    //Put form action button (PUT)
-  $( "div[name=put] > button" ).click(function( event ) {
+  $("div[name=put] > button").click(function( event ) {
       event.preventDefault();
       
       var body = {}
       //Retrieving form to make the put body
-      body["nom"] =  $("input[name='nom']").val();
-      body["prenom"] =  $("input[name='prenom']").val();
-      body["fonction"] =  $("input[name='fonction']").val();
-      body["anciennete"] =  parseInt($("input[name='anciennete']").val());
-      body["conge"] =  parseInt($("input[name='conge']").val());
-      body["actif"] =  ($("select[name='actif']").val() == 'true');
-      body["actionnaire"] = ($("select[name='actionnaire']").val() == 'true');
-      body["missions"] = $("input[name='missions']").val().split(",");
+      body["geonameid"] =  parseInt($("input[name='geonameid']").val());
+      body["name"] =  $("input[name='name']").val();
+      body["asciiname"] =  $("input[name='asciiname']").val();
+      body["alternate_names"] =  $("input[name='alternate_names']").val();
+      body["latitude"] =  parseFloat($("input[name='latitude']").val());
+      body["longitude"] =  parseFloat($("input[name='longitude']").val());
+      body["feature_class"] =  $("input[name='feature_class']").val();
+      body["feature_code"] =  $("input[name='feature_code']").val();
+      body["country_code"] =  $("input[name='country_code']").val();
+      body["cc2"] =  $("input[name='cc2']").val();
+      body["admin1"] =  $("input[name='admin1']").val();
+      body["admin2"] =  $("input[name='admin2']").val();
+      body["admin3"] =  $("input[name='admin3']").val();
+      body["admin4"] =  $("input[name='admin4']").val();
+      body["population"] =  parseInt($("input[name='population']").val());
+      body["elevation"] =  parseInt($("input[name='elevation']").val());
+      body["dem"] =  parseInt($("input[name='dem']").val());
+      body["timezone"] =  $("input[name='timezone']").val();
       
       //If one field is empty : error message.
       for(k in body){
@@ -173,10 +201,11 @@ $(document).ready(function(){
         
         $.ajax(settings).done(function (response) {
           console.log(response);
-          $("div[id=put_result]").html("<p>L'utilisateur a été ajouté à la base de données.</p>");
+          $("div[id=put_result]").html("<p>La localisation a été ajouté à la base de données.</p>");
           $("div[id=put_result]").css("color", "green");
           $("div[id=put_result]").show();
         }).fail(function(jqXHR) {
+          alert(jqXHR.responseText);
           $("div[id=put_result]").html("<p>Une erreur est survenue lors de l'ajout.</p>");
           $("div[id=put_result]").css("color", "red");
           $("div[id=put_result]").show();
@@ -206,7 +235,7 @@ function deleteData(event) {
 
   $.ajax(settings).done(function (response) {
   console.log(response);
-      $("div[id=get_result]").html("<p>L'utilisateur " + id + " a été supprimé de la base de données.</p>");
+      $("div[id=get_result]").html("<p>La localisation " + id + " a été supprimé de la base de données.</p>");
       $("div[id=get_result]").css("color", "green");
       $("div[id=get_result]").show();
   }).fail(function(jqXHR) {
@@ -233,20 +262,17 @@ function editData(event) {
 
 
 
-  var placeholder = ["id", "nom", "prenom", "fonction", "anciennete", "conge", "actif", "actionnaire", "missions"];
+  var placeholder = ["id", "geonameid", "name", "asciiname", "alternate_names", "latitude", "longitude", "feature_class", "feature_code", "country_code", "cc2", "admin1", "admin2", "admin3", "admin4", "population", "elevation", "dem", "timezone"];
   var count = 0;
-  var result = "<div><p><hr class='my-4'><p><h4 class='title-job text-center mb-4'>Edition de l'utilisateur " + id + "</h4></div><form class='booking-form'><div class='row'>";
+  var result = "<div><p><hr class='my-4'><p><h4 class='title-job text-center mb-4'>Edition de la localisation " + id + "</h4></div><form class='booking-form'><div class='row'>";
   $.each($(tr), function(){
-      if(count == 6 || count == 7){
-          result += "<div class='col-md mb-md-0 mb-1'><div class='form-group'><div class='form-field'><div class='select-wrap'><select name='" + placeholder[count] + "2' id='post' class='form-control'><option value='vide'>Inchangé</option><option value='true'>Oui</option><option value='false'>Non</option></select></div></div></div></div>";
-      }
-      else if (count == 4 || count == 5) {
+      if (count == 1 || count == 5 || count == 6 || count == 15 || count == 16 || count == 17) {
           result += "<div class='col-md mb-md-0 mb-1'><div class='form-group'><div class='form-field'><input type='number' name='" + placeholder[count] + "2' class='form-control' placeholder='" + $(this).text() + "'></div></div></div>";
       }
-      else if (count == 1 || count == 2 || count == 3 || count == 8 ){
+      else if (count != 0 && count != 20 && count && count != 19 && count != 21 ){
           result += "<div class='col-md mb-md-0 mb-1'><div class='form-group'><div class='form-field'><input type='text' name='" + placeholder[count] + "2' class='form-control' placeholder='" + $(this).text() + "'></div></div></div>";
       }
-      if (count == 4){
+      if (count == 4 || count == 8 || count == 12 || count == 16){
         result += "</div><div class='row'>";
       }
       count += 1;
@@ -259,56 +285,61 @@ function editData(event) {
 
 //Validate POST button action
 function validData(event, id) {
-event.preventDefault();
-var body = {}
-//Retrieving form to make the put body
-body["nom"] =  $("input[name='nom2']").val();
-body["prenom"] =  $("input[name='prenom2']").val();
-body["fonction"] =  $("input[name='fonction2']").val();
-body["anciennete"] =  parseInt($("input[name='anciennete2']").val());
-body["conge"] =  parseInt($("input[name='conge2']").val());
+  event.preventDefault();
+  var body = {}
+  //Retrieving form to make the put body
+  body["geonameid"] =  parseInt($("input[name='geonameid2']").val());
+  body["name"] =  $("input[name='name2']").val();
+  body["asciiname"] =  $("input[name='asciiname2']").val();
+  body["alternate_names"] =  $("input[name='alternate_names2']").val();
+  body["latitude"] =  parseFloat($("input[name='latitude2']").val());
+  body["longitude"] =  parseFloat($("input[name='longitude2']").val());
+  body["feature_class"] =  $("input[name='feature_class2']").val();
+  body["feature_code"] =  $("input[name='feature_code2']").val();
+  body["country_code"] =  $("input[name='country_code2']").val();
+  body["cc2"] =  $("input[name='cc22']").val();
+  body["admin1"] =  $("input[name='admin12']").val();
+  body["admin2"] =  $("input[name='admin22']").val();
+  body["admin3"] =  $("input[name='admin32']").val();
+  body["admin4"] =  $("input[name='admin42']").val();
+  body["population"] =  parseInt($("input[name='population2']").val());
+  body["elevation"] =  parseInt($("input[name='elevation2']").val());
+  body["dem"] =  parseInt($("input[name='dem2']").val());
+  body["timezone"] =  $("input[name='timezone2']").val();
 
-if($("select[name='actif2']").val() == 'true' || $("select[name='actif2']").val() == 'false'){
-  body["actif"] =  ($("select[name='actif2']").val() == 'true');
-}
-if($("select[name='actionnaire2']").val() == 'true' || $("select[name='actionnaire2']").val() == 'false'){
-  body["actionnaire"] = ($("select[name='actionnaire2']").val() == 'true');
-}
 
-body["missions"] = $("input[name='missions2']").val().split(",");
-
-for(k in body){
-  if(body[k] === "" || body[k][0] === '' || body[k] == "vide" || Number.isNaN(body[k])){
-    delete body[k];
+  for(k in body){
+    if(body[k] === "" || Number.isNaN(body[k])){
+      delete body[k];
+    }
   }
-}
 
-if(Object.keys(body).length == 0){
-  $("div[id=get_result]").html("<p>Aucun champ n'a été modifié, l'utilisateur reste inchangé.</p>");
-  $("div[id=get_result]").css("color", "red");
-  $("div[id=put_result]").show();
-  return;
-}
+  if(Object.keys(body).length == 0){
+    $("div[id=get_result]").html("<p>Aucun champ n'a été modifié, la localisation reste inchangé.</p>");
+    $("div[id=get_result]").css("color", "red");
+    $("div[id=put_result]").show();
+    return;
+  }
 
-var settings = {
-  "url": "/data/" + id,
-  "method": "POST",
-  "timeout": 0,
-  "headers": {
+  var settings = {
+    "url": "/data/" + id,
+    "method": "POST",
+    "timeout": 0,
+    "headers": {
     "Content-Type": "application/json"
-  },
-  "data": JSON.stringify(body),
-};
+    },
+    "data": JSON.stringify(body),
+  };
 
-$.ajax(settings).done(function (response) {
+  $.ajax(settings).done(function (response) {
   console.log(response);
-  $("div[id=get_result]").html("<p>L'utilisateur " + id + " a bien été modifié.</p>");
-  $("div[id=get_result]").css("color", "green");
-  $("div[id=put_result]").show();
-}).fail(function(jqXHR) {
-  $("div[id=get_result]").html("<p>Une erreur est survenue lors de l'édition.</p>");
-  $("div[id=get_result]").css("color", "red");
-  $("div[id=get_result]").show();
-});
+    $("div[id=get_result]").html("<p>La localisation " + id + " a bien été modifié.</p>");
+    $("div[id=get_result]").css("color", "green");
+    $("div[id=put_result]").show();
+  }).fail(function(jqXHR) {
+    $("div[id=get_result]").html("<p>Une erreur est survenue lors de l'édition.</p>");
+    $("div[id=get_result]").css("color", "red");
+    $("div[id=get_result]").show();
+  });
 
 };//end validate post

@@ -5,6 +5,7 @@ from .services.AuthService import User, authenticate, identity
 from werkzeug.security import safe_str_cmp
 
 #Définition de l'app : Veuillez à importez les packages de l'app après.
+#Attention si vous lancez le programme dans une IDE le current working directory correspondra au dossier ouvert ou à l'emplacement du terminal de l'ide.
 app = Flask(__name__, static_folder= str(os.getcwd()) + '/frontend/static/', 
                     template_folder= str(os.getcwd()) + '/frontend/templates/')
 
